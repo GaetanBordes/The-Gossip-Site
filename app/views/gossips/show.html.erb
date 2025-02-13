@@ -1,0 +1,77 @@
+<div class="container mt-5 blog-container">
+  <!-- Titre du Gossip -->
+  <h1 class="display-4 font-italic text-center mb-4"><%= @gossip.title %></h1>
+
+  <!-- Carte avec le contenu du Gossip -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <p class="card-text"><%= @gossip.content %></p>
+      <small class="text-muted">
+        Posté par
+        <%= link_to @gossip.user.username, user_path(@gossip.user), class: "text-decoration-none text-primary" %>
+        le <%= @gossip.created_at.strftime("%d/%m/%Y à %H:%M") %>
+      </small>
+
+      <!-- Affichage du nombre de likes -->
+      <div class="mt-2">
+        <i class="fas fa-heart text-danger"></i> <%= @gossip.likes.count %>
+      </div>
+
+      <!-- Boutons Éditer, Supprimer (si l'utilisateur est l'auteur) -->
+      <% if current_user && current_user == @gossip.user %>
+        <div class="mt-3">
+          <%= link_to 'Éditer', edit_gossip_path(@gossip), class: "btn btn-warning btn-sm" %>
+          <%= form_with(model: @gossip, method: :delete, class: "d-inline") do |form| %>
+            <%= form.submit 'Supprimer', class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <!-- Bouton Like/Unlike (si l'utilisateur est connecté) -->
+      <% if current_user %>
+        <div class="mt-2">
+          <% if @gossip.likes.where(user: current_user).exists? %>
+            <%= button_to "Je n'aime plus", gossip_like_path(@gossip, @gossip.likes.find_by(user: current_user)), method: :delete, class: "btn btn-secondary btn-sm" %>
+          <% else %>
+            <%= button_to "J'aime", gossip_likes_path(@gossip), method: :post, class: "btn btn-success btn-sm" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Section Commentaires -->
+  <div class="mt-5">
+    <h3 class="mb-3">Commentaires</h3>
+
+    <% if current_user %>
+      <%= form_with(model: [@gossip, @gossip.comments.build], local: true, class: "mb-4") do |form| %>
+        <div class="form-group">
+          <%= form.text_area :content, class: "form-control", placeholder: "Ajouter un commentaire..." %>
+        </div>
+        <div class="text-right">
+          <%= form.submit "Commenter", class: "btn btn-primary btn-sm" %>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-muted">Connectez-vous pour ajouter un commentaire.</p>
+    <% end %>
+
+    <!-- Liste des commentaires -->
+    <% @gossip.comments.each do |comment| %>
+      <div class="card mb-2">
+        <div class="card-body">
+          <p class="card-text"><%= comment.content %></p>
+          <% if current_user && current_user == comment.user %>
+            <%= link_to "Supprimer", gossip_comment_path(@gossip, comment), method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger btn-sm float-right" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Bouton Retour -->
+  <div class="text-center mb-4">
+    <%= link_to 'Retour aux Gossips', gossips_path, class: "btn btn-secondary btn-lg" %>
+  </div>
+</div>

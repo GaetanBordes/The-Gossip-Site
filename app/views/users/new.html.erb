@@ -1,0 +1,84 @@
+<div class="container mt-5">
+  <h1 class="display-4 font-italic text-center mb-4">Sign Up</h1>
+  <%= form_with model: @user, local: true, class: "needs-validation", novalidate: true do |form| %>
+    <!-- Afficher les messages d'erreur -->
+    <% if @user.errors.any? %>
+      <div class="alert alert-danger">
+        <h4 class="alert-heading">Oops! The following errors occurred:</h4>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Champ Username -->
+    <div class="form-group">
+      <%= form.label :username, "Username", class: "font-weight-bold" %>
+      <%= form.text_field :username, class: "form-control", placeholder: "Enter your username", required: true %>
+      <div class="invalid-feedback">
+        Please choose a username.
+      </div>
+    </div>
+
+    <!-- Champ Email -->
+    <div class="form-group">
+      <%= form.label :email, "Email", class: "font-weight-bold" %>
+      <%= form.email_field :email, class: "form-control", placeholder: "Enter your email", required: true %>
+      <div class="invalid-feedback">
+        Please provide a valid email.
+      </div>
+    </div>
+
+    <!-- Champ City -->
+    <div class="form-group">
+      <%= form.label :city, "City", class: "font-weight-bold" %>
+      <%= form.text_field :city, class: "form-control", placeholder: "Enter your city", required: true %>
+      <div class="invalid-feedback">
+        Please provide your city.
+      </div>
+    </div>
+
+    <!-- Champ Birth Date -->
+    <div class="form-group">
+      <%= form.label :birth_date, "Birth Date", class: "font-weight-bold" %>
+      <%= form.date_field :birth_date, class: "form-control", required: true %>
+      <div class="invalid-feedback">
+        Please provide your birth date.
+      </div>
+    </div>
+
+    <!-- Champ Description -->
+    <div class="form-group">
+      <%= form.label :description, "Description", class: "font-weight-bold" %>
+      <%= form.text_area :description, class: "form-control", placeholder: "Tell us about yourself", rows: 4, required: true %>
+      <div class="invalid-feedback">
+        Please write a short description.
+      </div>
+    </div>
+
+    <!-- Champ Password -->
+    <div class="form-group">
+      <%= form.label :password, "Password", class: "font-weight-bold" %>
+      <%= form.password_field :password, class: "form-control", placeholder: "Enter a password", required: true %>
+      <div class="invalid-feedback">
+        Please choose a password.
+      </div>
+    </div>
+
+    <!-- Champ Confirm Password -->
+    <div class="form-group">
+      <%= form.label :password_confirmation, "Confirm Password", class: "font-weight-bold" %>
+      <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm your password", required: true %>
+      <div class="invalid-feedback">
+        Please confirm your password.
+      </div>
+    </div>
+
+    <!-- Bouton Submit -->
+    <div class="form-group text-center">
+      <%= form.submit "Sign Up", class: "btn btn-primary btn-lg px-5" %>
+    </div>
+  <% end %>
+</div>

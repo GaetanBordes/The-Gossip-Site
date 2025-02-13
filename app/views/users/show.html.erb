@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <% if @user %>
+    <div class="text-center mb-5">
+      <h1 class="display-4 font-weight-bold custom-title"><%= @user.username %>'s Profile</h1>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold">À propos de <%= @user.username %></h5>
+            <p class="card-text"><strong>Email:</strong> <%= @user.email %></p>
+            <p class="card-text"><strong>Ville:</strong> <%= link_to @user.city, city_gossips_path(city: @user.city) %></p>
+            <p class="card-text"><strong>Date de Naissance:</strong> <%= @user.birth_date %></p>
+            <p class="card-text"><strong>Description:</strong> <%= @user.description %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <h2 class="mt-4 font-weight-bold">Potins de <%= @user.username %></h2>
+        <% if @user.gossips.any? %>
+          <div class="list-group mb-3">
+            <% @user.gossips.each do |gossip| %>
+              <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1"><%= link_to gossip.title, gossip_path(gossip), class: "text-dark" %></h5>
+                  <small class="text-muted"><%= gossip.created_at.strftime("%d/%m/%Y à %H:%M") %></small>
+                </div>
+                <p class="mb-1"><%= gossip.content %></p>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted"><%= @user.username %> n'a pas encore publié de potins.</p>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="text-center">
+      <h1 class="display-4 font-weight-bold custom-title">Utilisateur Non Trouvé</h1>
+      <p class="lead">L'utilisateur que vous recherchez n'existe pas.</p>
+    </div>
+  <% end %>
+</div>

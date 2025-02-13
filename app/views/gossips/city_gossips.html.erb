@@ -1,0 +1,19 @@
+<div class="container mt-5">
+  <h1>Gossips in <%= @city %></h1>
+
+  <% if @gossips.any? %>
+    <div class="list-group">
+      <% @gossips.each do |gossip| %>
+        <div class="list-group-item">
+          <h5><%= link_to gossip.title, gossip_path(gossip) %></h5>
+          <p><%= gossip.content %></p>
+          <small>Posted by <%= link_to gossip.user.username, user_path(gossip.user) %> on <%= gossip.created_at.strftime("%d/%m/%Y at %H:%M") %></small>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No gossips found for <%= @city %>.</p>
+  <% end %>
+
+  <%= link_to 'Back to Gossips', gossips_path, class: "btn btn-secondary mt-3" %>
+</div>

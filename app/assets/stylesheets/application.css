@@ -1,0 +1,104 @@
+@import "bootstrap";
+
+.custom-title {
+  color: #007bff; 
+  border-bottom: 2px solid #007bff;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item {
+  border-left: 3px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.list-group-item:hover {
+  border-color: #007bff;
+}
+
+.custom-navbar {
+  background-color: #343a40; /* Couleur de fond personnalisée */
+}
+
+/* Style général pour le corps de la page */
+body {
+  background-color: #f4f4f9; /* Fond clair et neutre */
+  font-family: 'Arial', sans-serif; /* Police de caractères simple et lisible */
+  color: #333; /* Couleur de texte principale */
+}
+
+/* Style pour le conteneur principal */
+.blog-container {
+  max-width: 800px; /* Limite la largeur pour un look épuré */
+  margin: 0 auto; /* Centre le conteneur */
+}
+
+/* Style pour les titres */
+h1, h2, h3 {
+  color: #444; /* Couleur de titre sobre */
+  font-weight: 600; /* Épaisseur de la police */
+}
+
+/* Style pour les cartes (gossips et commentaires) */
+.card {
+  background-color: #ffffff; /* Fond blanc pour les cartes */
+  border: 1px solid #ddd; /* Bordure subtile */
+  border-radius: 4px; /* Coins légèrement arrondis */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Ombre légère */
+  margin-bottom: 1.5rem; /* Espace entre les cartes */
+}
+
+.card-body {
+  padding: 1.25rem; /* Espace intérieur des cartes */
+}
+
+/* Style pour les boutons */
+.btn {
+  border-radius: 4px; /* Coins arrondis pour les boutons */
+  text-transform: capitalize; /* Texte en majuscules */
+}
+
+.btn-primary, .btn-success, .btn-warning, .btn-danger {
+  border: none; /* Supprime les bordures des boutons */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère pour les boutons */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Couleur principale */
+  border-color: #007bff;
+}
+
+.btn-success {
+  background-color: #28a745; /* Couleur succès */
+  border-color: #28a745;
+}
+
+.btn-warning {
+  background-color: #ffc107; /* Couleur avertissement */
+  border-color: #ffc107;
+}
+
+.btn-danger {
+  background-color: #dc3545; /* Couleur danger */
+  border-color: #dc3545;
+}
+
+/* Style pour les liens */
+a {
+  color: #007bff; /* Couleur des liens */
+  text-decoration: none; /* Supprime le soulignement des liens */
+}
+
+a:hover {
+  color: #0056b3; /* Couleur au survol des liens */
+}
+
+/* Style pour les petits textes (dates, etc.) */
+small {
+  color: #6c757d; /* Couleur de texte secondaire */
+}
